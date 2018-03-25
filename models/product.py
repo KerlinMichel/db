@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Datetime, ForeignKey
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 from .Base import Base
 
@@ -8,6 +9,7 @@ class Product(Base):
 
     upc = Column(String, primary_key=True)
     name = Column(String)
+    last_updated = Column(DateTime, onupdate=datetime.now)
     pricehistory = relationship('ProductPriceHistory')
 
 class ProductPriceHistory(Base):
